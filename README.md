@@ -18,21 +18,8 @@ Cloner le projet dans le repertoire
 
  git clone https://github.com/Naajen/P6_AI_21032022.git
 
-Aller dans le frontend
-    -cd frontend
-
-Installer les dépendences
-
-    -npm install
-
-Angular
-
-    -npm i angular
-
-Démarrer
-    - ng serve
-
 # Lancer le backEnd
+Créer le dossier backend à la racine
 
 Aller dans le Backend
 
