@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 //Le model de schéma pour la BdD mongoDB
 const sauceSchema = mongoose.Schema({
-    userId: { type: String, required: true },
+    userId: { type: String, required: true }, //alphanumérique lettre & chiffre
     name: { type: String, required: true },
     manufacturer: { type: String, required: true },
     description: { type: String, required: true },
@@ -13,7 +13,7 @@ const sauceSchema = mongoose.Schema({
     dislikes: { type: Number, default: 0 },
     usersLiked: { type: [String] },
     usersDisliked: { type: [String] },
-  });
+});
   
 //methode model le transforme en un modèle utilisable
 module.exports = mongoose.model('Sauce', sauceSchema);

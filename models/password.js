@@ -12,7 +12,7 @@ passwordSchema
 .has().lowercase()                              // Must have lowercase letters Minuscule
 .has().digits(2)                                // Must have at least 2 digits chiffre
 .has().not().spaces()                           // Should not have spaces
-.is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values Trier les mdp type trop facile comme azerty
+.is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values, Trier les mdp type trop facile comme azerty
 
 //export
 module.exports = passwordSchema;

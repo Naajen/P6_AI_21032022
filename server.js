@@ -3,7 +3,7 @@ const http = require('http'); //module http pour createServer
 const app = require('./app');
 
 
-//fonction elle sert à quoi ??
+//fonction normalizePort renvoie un port valide, fourni sous forme d'un numéro ou d'une chaîne
 const normalizePort = val => {
   const port = parseInt(val, 10);
   
@@ -16,13 +16,14 @@ const normalizePort = val => {
   return false;
 };
 
-//en cas d'erreur !
+//fonction errorHandler recherche les différentes erreurs et les gère de manière appropriée. Elle est enreg dans le serveur
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;
   }
   const address = server.address();
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
+  //code prédifini privilège
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges.');
@@ -37,8 +38,8 @@ const errorHandler = error => {
   }
 };
 
-//Création du port 3000 & attendre les requetes envoyé
-const port = normalizePort(process.env.PORT || '3000');
+//Création d'un port d'écoute consignant le port ou le canal sur lequel le serveur va s'executer, ici le port 3000 max 65535
+const port = normalizePort(process.env.PORT || '1337' || '3001');
 app.set('port', port);
 
 //Creation du serveur createServer()
@@ -52,7 +53,7 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
-//Le serveur écoute le port 3000
+//Le serveur écoute le port 3000 ou 1337 ou 3001 en fonction de la disponnibilité
 server.listen(port);
 
 

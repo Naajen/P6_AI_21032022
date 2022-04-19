@@ -15,7 +15,7 @@ exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   const sauce = new Sauce({
-    ...sauceObject,
+    ...sauceObject, // ... spread opérator / dégradé d'un tableau dans les variable
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });
   sauce
@@ -41,6 +41,10 @@ exports.modifySauce = (req, res, next) => {
     if (sauce.userId !== req.auth.userId) {
       return res.status(403).json ({error: "Authentification non valide"});
     }
+    //Ne garde pas l'ancienne image si elle est remplacer
+    const filename = sauce.imageUrl.split("/images/")[1];
+    fs.unlink(`images/${filename}`, ()=> console.log("image supprimé"))
+    
     const sauceObject = req.file
       ? {
         ...JSON.parse(req.body.sauce),
@@ -101,7 +105,7 @@ exports.likeAndDislike = (req, res, next) => {
           $push: {usersLiked: userId}
         }
       )
-      .then(() => res.status(200).json({ message: 'Likeeeeed Yaalllahhh !' }))
+      .then(() => res.status(200).json({ message: 'Likeeeeed Yeaaahhh !' }))
       .catch((error) => res.status(400).json({ error }))
     break;
     //Si l'utilisateur n'aime pas la sauce
@@ -130,7 +134,7 @@ exports.likeAndDislike = (req, res, next) => {
             $pull: { usersLiked: userId }, 
             $inc: { likes: -1 }
           })
-        .then(() => res.status(200).json({ message: 'Mouais va y like c\'est mieux non ?' }))
+        .then(() => res.status(200).json({ message: 'Aie la sauce pique trop ?' }))
         .catch((error) => res.status(400).json({ error }))
         }
         if (sauce.usersDisliked.includes(userId)) {
